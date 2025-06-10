@@ -25,6 +25,10 @@
       {
         "command": "copyonsaveandedit.extfilename",
         "title": "copyonsaveandedit.json"
+      },
+      {
+        "command": "copyonsaveandedit.createjson",
+        "title": "Créer le fichier copyonsaveandedit.json"
       }
     ]
   },

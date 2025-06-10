@@ -10,6 +10,49 @@ interface CopyRule {
 }
 
 export function activate(context: vscode.ExtensionContext) {
+	// Commande pour créer le fichier JSON exemple
+	const createJsonCmd = vscode.commands.registerCommand('copyonsaveandedit.createjson', async () => {
+		const wsFolders = vscode.workspace.workspaceFolders;
+		if (!wsFolders) {
+			vscode.window.showErrorMessage("Aucun dossier ouvert.");
+			return;
+		}
+		const root = wsFolders[0].uri.fsPath;
+		const configPath = path.join(root, 'copyonsaveandedit.json');
+
+		if (fs.existsSync(configPath)) {
+			const answer = await vscode.window.showWarningMessage(
+				"Le fichier existe déjà. Écraser ?",
+				"Oui", "Non"
+			);
+			if (answer !== "Oui") return;
+		}
+
+		const example: CopyRule[] = [
+			{
+				source: "test/test.txt",
+				destination: "copies/test_copy.txt",
+				injection: "// Ajout exemple",
+				position: "end"
+			},
+			{
+				source: "test/test2.txt",
+				destination: "copies/test2_copy.txt",
+				injection: "// Ajout exemple",
+				position: "start"
+			}
+		];
+		try {
+			fs.writeFileSync(configPath, JSON.stringify(example, null, 2), 'utf-8');
+			vscode.window.showInformationMessage("Fichier copyonsaveandedit.json créé.");
+			const doc = await vscode.workspace.openTextDocument(configPath);
+			vscode.window.showTextDocument(doc);
+		} catch (e: any) {
+			vscode.window.showErrorMessage("Erreur écriture du fichier : " + e.message);
+		}
+	});
+	context.subscriptions.push(createJsonCmd);
+
 	vscode.workspace.onDidSaveTextDocument(document => {
 		const workspaceFolders = vscode.workspace.workspaceFolders;
 		if (!workspaceFolders) return;
@@ -31,7 +74,7 @@ export function activate(context: vscode.ExtensionContext) {
 			return;
 		}
 
-		const fileName = path.basename(document.uri.fsPath);
+		const fileName = path.relative(rootPath, document.uri.fsPath).replace(/\\/g, '/');
 
 		const matchingRules = rules.filter(rule => rule.source === fileName);
 
