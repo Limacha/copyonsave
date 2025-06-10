@@ -2,7 +2,7 @@
   "name": "copyonsaveandedit",
   "displayName": "copyonsaveandedit",
   "description": "copy a file in an other file when you saving it and add sometings to it",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "Arflaka-Limacha",
   "license": "see license in LICENSE.txt",
   "engines": {
@@ -46,5 +46,9 @@
     "typescript": "^5.8.3",
     "@vscode/test-cli": "^0.0.10",
     "@vscode/test-electron": "^2.5.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Limacha/copyonsave.git"
   }
 }
