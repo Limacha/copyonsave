@@ -1,0 +1,50 @@
+{
+  "name": "copyonsaveandedit",
+  "displayName": "copyonsaveandedit",
+  "description": "copy a file in an other file when you saving it and add sometings to it",
+  "version": "0.0.3",
+  "publisher": "Arflaka-Limacha",
+  "license": "see license in LICENSE.txt",
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onDidSaveTextDocument"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "copyonsaveandedit.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "copyonsaveandedit.extfilename",
+        "title": "copyonsaveandedit.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.100.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "eslint": "^9.25.1",
+    "typescript": "^5.8.3",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}
