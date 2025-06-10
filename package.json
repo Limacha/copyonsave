@@ -2,7 +2,7 @@
   "name": "copyonsaveandedit",
   "displayName": "copyonsaveandedit",
   "description": "copy a file in an other file when you saving it and add sometings to it",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "publisher": "Arflaka-Limacha",
   "license": "see license in LICENSE.txt",
   "engines": {
